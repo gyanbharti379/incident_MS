@@ -1,0 +1,159 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+<style>
+  .upperblock{
+      border: 1px solid #ccc;
+      width: 100%;
+      height: 80px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    }
+    .lowerblock{
+      border: 1px solid #ccc;
+      padding: 50px;
+      width: 100%;
+      height: 350px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+    }
+    h1{
+      
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #333;
+      margin-left: 50px;
+      margin-right: 50px;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      
+    }.btn-primary{
+      margin-left: 50px;
+      margin-right: 50px;
+      width: 400px;
+      padding: 10px;
+      background-color: #30E2CA;
+      color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 25px;  
+      outline: none;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    input[type="email"], input[type="text"] {
+        width: 400px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 25px;  
+        outline: none;
+        font-size: 16px;
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+      input[type="password"] {
+        position: relative;
+        width: 400px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 25px;   
+        outline: none;
+        font-size: 16px;
+        margin-left: 50px;
+        margin-right: 50px;
+      }img{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 14%;
+        top: 61%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }h6{
+      text-align: right;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 100px;
+      margin-right: 40px;
+      color: #69CCF8;
+      
+      font-size: 15px;
+      font-weight: bold;
+    }
+      
+
+</style>
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-4 col-lg-5">
+          <div class="card mt-5 mb-5">
+            <span class="d-block p-2 text-bg-primary upperblock">
+              {{result}}
+            </span>
+            <span class="d-block p-2 text-bg-light lowerblock">
+              <div class="card-body">
+                <h1 class="text-left">USER LOGIN</h1>
+                <form id="form" action="{% url 'submitLoginForm' %}" method="post">
+                  {% csrf_token %}
+                    <div class="form-group mb-3">
+                         
+                        <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email" required>
+                    </div>
+                    <div class="form-group mb-3">
+                         
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                        <img src="/media/icons/hide.png" alt="togglePassword" id="togglePassword">
+                    </div>
+                    <div class="form-group mb-3">
+                       <h6 onclick="handelClick()">Forget Password ?</h6>  
+                     
+                      
+                  </div>
+                    <button type="submit" class="btn btn-primary">LOG ME IN</button>
+                </form>
+                
+              </div>
+            </span>
+              
+          </div>
+      </div>
+  </div>
+</div>  
+
+<script>
+
+  function handelClick(){
+    window.location.href = "{% url 'password_reset' %}";
+  }
+
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordField = document.getElementById('password');
+
+  togglePassword.addEventListener('click', function () {
+      // Toggle between 'password' and 'text' types
+      if (passwordField.type === "password") {
+          passwordField.type = "text";
+          togglePassword.src = "/media/icons/show.png";
+         
+      } else {
+          passwordField.type = "password";
+          togglePassword.src = "/media/icons/hide.png";
+          
+      }
+  });
+
+  document.getElementById('form').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      let elements = Array.from(document.querySelectorAll('input'));
+      let index = elements.indexOf(document.activeElement);
+      if (index < elements.length - 1) {
+          elements[index + 1].focus();
+        }
+    }
+});
+
+</script>
+
+{% endblock %}

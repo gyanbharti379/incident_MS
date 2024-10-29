@@ -1,0 +1,167 @@
+{% extends 'backend/base_2.html' %}
+
+{% block content %}
+<style>
+ 
+.title{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 20px;
+  }  
+
+.card-post-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+}
+.card-post {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        width: 45%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: 10px;
+   
+    }
+.card-post-history {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        width: 800px;
+        height: 800px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: 10px;
+        
+   
+}    
+    .card-img-top-1{
+        width: 100%;
+        height: auto;
+    }
+    
+  h1{
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    
+  }
+  h2{
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #69CCF8;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .btn-primary{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 35%;
+    margin-right: 40%;
+    width: 200px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+</style>
+
+<h1 class="title">Incident Management System</h1>
+ 
+<div class="container mt-lg-6">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-post" style="width: 18rem;">
+                <img class="card-img-top-1" src="/media/images/user.png" alt="Chat AI Card">
+                <div class="card-body">
+                  <h5 class="card-title">Welcome {{name}}!</h5>
+                  <p class="card-text">From {{cat}}.</p>
+                     
+                  </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-post-history">
+              <h1 class="title">Edit Incident</h1>
+              <form id="incident-form" action="{% url 'updateIncidentForm' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="incident_about">About</label>
+                  <input type="text" class="form-control" id="incident_about" name="incident_about" value="{{incident_name}}">
+                </div>
+                <div class="form-group">
+                  <label for="incident_details">Details</label>
+                  <textarea class="form-control" id="incident_details" rows="10" name="incident_details">{{incident_details}}</textarea>
+                </div>
+                 
+                <div class="form-group">
+                  <label for="priority">Priority</label>
+                  <select class="form-control" id="priority name" name="incident_priority">
+                    <option>Select</option>
+                    {% if incident_priority == "High" %}
+                    <option selected>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                    {% elif incident_priority == "Medium" %}
+                    <option>High</option>
+                    <option selected>Medium</option>
+                    <option>Low</option>
+                    {% elif incident_priority == "Low" %}
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option selected>Low</option>
+                    {% endif %}
+ 
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="priority">Status</label>
+                  <select class="form-control" id="status name" name="incident_status">
+                    {% if incident_status == "Open" %}
+                    <option selected>Open</option>
+                    <option>In Progress</option>
+                    <option>Closed</option>
+                    {% elif incident_status == "In Progress" %}
+                    <option>Open</option>
+                    <option selected>In Progress</option>
+                    <option>Closed</option>
+                    {% elif incident_status == "Closed" %}
+                    <option>Open</option>
+                    <option>In Progress</option>
+                    <option selected>Closed</option>
+                    {% endif %}
+                  </select>
+                     
+                </div>
+                 
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+          </div>            
+        </div>
+        
+    </div>
+</div>
+
+     
+  
+{% endblock %} 

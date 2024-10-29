@@ -1,0 +1,80 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+<style>
+ 
+.title{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 20px;
+      
+
+  }  
+ img {
+        width: 100%;  
+        height: auto;
+}
+ 
+    .card-post-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+    .card-post {
+        
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        width: 45%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        margin-left: 50%;
+        margin-right: 50%;
+    }
+    .card-img-top-1{
+        width: 100%;
+        height: auto;
+    }
+    .card-img-top-2{
+        width: 100%;
+        height: 240px;
+    }
+</style>
+<img src="/media/images/inci01.png" alt="Chat AI Card">
+<h1 class="title">Incident Management System</h1>
+ 
+<div class="container mt-lg-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-post" style="width: 18rem;">
+                <img class="card-img-top-1" src="/media/images/inci02.png" alt="Chat AI Card">
+                <div class="card-body">
+                    <h5 class="card-title">Report Incident</h5>
+                    <p class="card-text">Write your incident and get a report.</p>
+                    <a href="{% url 'register'%}" class="btn btn-primary">Write Incident</a>
+                  </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-post" style="width: 18rem;">
+                <img class="card-img-top-2" src="/media/images/inci03.png" alt="Manual Form">
+                <div class="card-body">
+                    <h5 class="card-title">View Report</h5>
+                    <p class="card-text">View your report.</p>
+                    <a href="{% url 'login'%}" class="btn btn-primary">Read Report</a>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+     
+  
+{% endblock %} 

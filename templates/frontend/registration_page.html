@@ -1,0 +1,272 @@
+{% extends 'frontend/base.html' %}
+
+{% block content %}
+<style>
+  .upperblock{
+    border: 1px solid #ccc;
+    width: 1300px;
+    height: 70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .lowerblock{
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 1300px;
+    height: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+  }
+    h1{
+      
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #333;
+      margin-left: 50px;
+      margin-right: 50px;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      
+    } 
+        
+     .form-title{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    color: black;
+    border-bottom: 2px solid black;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 20px;
+  }.btn-primary{
+      
+      margin-left: 35%;
+      margin-right: 50%;
+      width: 400px;
+      padding: 10px;
+      background-color: #30E2CA;
+      color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 25px;  
+      outline: none;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+      
+
+</style>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4 col-lg-12">
+      <div class="card mt-5 mb-5">
+        <span class="d-block p-2 text-bg-primary upperblock">{{result}}</span>
+        <span class="d-block p-2 text-bg-light lowerblock">
+            <h1 class="form-title">SIGN UP</h1>
+              <form id="form" action="{% url 'submitUserRegistrationForm' %}" method="post">
+              
+                {% csrf_token %}
+                <div class="card-header">    
+                    <h5>Individual/Enterprise/Government*</h5>
+    
+                    <!--  radio button start here -->
+                    <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="category" id="category01" value="individual">
+                            <label class="form-check-label radio-label" for="category01">Individual</label>
+                          </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="category" id="category02" value="enterprise">
+                            <label class="form-check-label radio-label" for="category01">Enterprise</label>
+                          </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="category" id="category03" value="government">
+                            <label class="form-check-label radio-label" for="category01">Government</label>
+                          </div>
+                      </div>
+                  </div>
+                  <!----Radio button end here-->
+
+                  </div>
+                  <div class="card-body row g-4">
+                    <div class="col-md-6">
+                      <label for="validationServer01" class="form-label">First name*</label>
+                      <input type="text" name="fname" min="4" maxlength="12" class="form-control is-invalid" id="validationServer01" placeholder="First name" required>
+                      <div class="invalid-feedback">Please enter a valid first name.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="validationServer02" class="form-label">Last name</label>
+                      <input type="text" name="lname" min="4" maxlength="12" class="form-control" id="validationServer02" placeholder="Last name" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="validationServerUsername" class="form-label">Email*</label>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                          <input type="email" name="email" min="10" maxlength="24" class="form-control is-invalid" id="validationServerUsername" placeholder="Email ID" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                          <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                              Please Enter Valid Email.
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="validationServer03" class="form-label">Address*</label>
+                        <input type="text" name="address" min ="4" maxlength="24" class="form-control is-invalid" id="validationServer03" placeholder="Address" aria-describedby="validationServer03Feedback" required>
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                            Please enter valid address.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationServer04" class="form-label">City*</label>
+                        <input type="text" name="city"class="form-control is-invalid" id="city" placeholder="City" aria-describedby="validationServer03Feedback" required>
+                        <div id="validationServer04Feedback" class="invalid-feedback">
+                            Auto select your city.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationServer05" class="form-label">Pincode*</label>
+                        <input type="number" name="pincode" pattern="\d{6}" class="form-control is-invalid" id="pincode" placeholder="122-025" aria-describedby="validationServer05Feedback" required>
+                        <div id="validationServer05Feedback" class="invalid-feedback">
+                            Please enter valid pincode.
+                  
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="validationServer04" class="form-label">State*</label>
+                      <input type="text" name="state"class="form-control is-invalid" id="state" placeholder="State" aria-describedby="validationServer03Feedback" required>
+                      <div id="validationServer04Feedback" class="invalid-feedback">
+                          Auto select your state.
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationServer03" class="form-label">Country*</label>
+                        <input type="text" name="country" class="form-control is-invalid" id="country" placeholder="Country" aria-describedby="validationServer03Feedback" required>
+                      <div id="validationServer04Feedback" class="invalid-feedback">
+                          Auto select your country.
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="validationServer04" class="form-label">STD*</label>
+                        <select class="form-select is-invalid" id="validationServer04" name="std"  aria-multiline="validationServer04Feedback" required>
+                          <option selected disabled value="">Choose...</option>
+                          <option>0562</option>
+                          <option>0563</option>
+                          <option>0564</option>
+                          <option>0565</option>
+                      </select>
+                      <div id="validationServer04Feedback" class="invalid-feedback">
+                          Please select std code
+                      </div>
+                    </div>
+                         
+                    <div class="col-md-10">
+                        <label for="validationServer04" class="form-label">Phone*</label>
+                        <input type="number" name="phone" pattern="\d{10}" class="form-control is-invalid" id="validationServer03" placeholder="122-0255656" aria-describedby="validationServer03Feedback" required>
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                            Please enter valid phone number.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationServer05" class="form-label">Fax*</label>
+                        <input type="number" class="form-control is-invalid" id="validationServer05" pattern="\d{8}" name="fax" placeholder="011-25632589" aria-describedby="validationServer05Feedback" required>
+                        <div id="validationServer05Feedback" class="invalid-feedback">
+                            Please enter valid fax number.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="validationServer05" class="form-label">Mobile Number*</label>
+                      <input type="number" name="mobile_no"pattern="\d{10}" class="form-control is-invalid" id="validationServer05" placeholder="984-523-5645"  aria-describedby="validationServer05Feedback" required>
+                      <div id="validationServer05Feedback" class="invalid-feedback">
+                          Please enter valid mobile number.
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="validationServer05" class="form-label">Password*</label>
+                    <input type="password" class="form-control is-invalid" id="validationServer05" min="8" maxlength="20"  name="password1" placeholder="Password"  aria-describedby="validationServer05Feedback" required>
+                    <div id="validationServer05Feedback" class="invalid-feedback">
+                      Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <label for="validationServer05" class="form-label">confirm Password*</label>
+                  <input type="password" class="form-control is-invalid" id="validationServer05" min ="8" maxlength="20" name="password2" placeholder="confirm password"  aria-describedby="validationServer05Feedback" required>
+                  <div id="validationServer05Feedback" class="invalid-feedback">
+                    confirm password should be same as password
+                  </div>
+              </div>
+                 
+                  <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Sign up</button>
+                  </div>
+  
+                </div>
+              </form>
+
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+   
+
+<script>
+  
+  function focusNext(event, category01 ) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      document.getElementById(category02).focus();
+    }
+  }
+  
+
+  document.getElementById('form').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      let elements = Array.from(document.querySelectorAll('input', 'select'));
+      let index = elements.indexOf(document.activeElement);
+      if (index < elements.length - 1) {
+          elements[index + 1].focus();
+        }
+    }
+});
+
+
+document.getElementById("pincode").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();  // Prevent form submission
+         
+        fetchCityStateCountryData();
+    }
+});
+
+function fetchCityStateCountryData() {
+    const pincode = document.getElementById("pincode").value;
+
+    if (pincode) {
+      
+        fetch(`/get-location?pincode=${pincode}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("city").value = data.city;
+                document.getElementById("state").value = data.state;
+                document.getElementById("country").value = data.country;
+            })
+            .catch(error => console.error("Error fetching location data:", error));
+    } else {
+        alert("Please enter a pincode.");
+    }
+}
+
+</script>
+
+{% endblock %}
